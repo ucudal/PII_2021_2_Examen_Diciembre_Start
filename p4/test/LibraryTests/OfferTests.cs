@@ -22,7 +22,7 @@ namespace Ucu.Poo.Defense.Tests
         {
             Offer Offer = new Offer(DateTime.Today);
             IOfferItem item =  Offer.AddItem(caja, 1, 1);
-            IOfferItem discount = Offer.AddDiscount(-1);
+            IOfferItem discount = Offer.AddDiscount("Black Friday", -1);
 
             Assert.That(Offer.Items, Has.Member(item));
             Assert.That(Offer.Items, Has.Member(discount));
@@ -33,7 +33,7 @@ namespace Ucu.Poo.Defense.Tests
         {
             Offer Offer = new Offer(DateTime.Today);
             IOfferItem item = Offer.AddItem(caja, 1, 1);
-            IOfferItem discount = Offer.AddDiscount(-1);
+            IOfferItem discount = Offer.AddDiscount("Black Friday", -1);
             Assert.That(Offer.Items, Has.Member(item));
             Assert.That(Offer.Items, Has.Member(discount));
 
@@ -50,7 +50,7 @@ namespace Ucu.Poo.Defense.Tests
             Offer Offer = new Offer(DateTime.Today);
             OfferItem item1 = Offer.AddItem(caja, 2, 2);
             OfferItem item2 = Offer.AddItem(placa, 3, 4);
-            PromoCode discount = Offer.AddDiscount(-1);
+            PromoCode discount = Offer.AddDiscount("Black Friday", -1);
             int expected = item1.Quantity * item1.Price + item2.Quantity * item2.Price -1;
 
             Assert.That(Offer.Total, Is.EqualTo(expected));
@@ -60,7 +60,7 @@ namespace Ucu.Poo.Defense.Tests
         public void AddInvalidDiscount()
         {
             Offer Offer = new Offer(DateTime.Today);
-            Assert.That(() => Offer.AddDiscount(1), Throws.TypeOf<ArgumentException>());            
+            Assert.That(() => Offer.AddDiscount("Black Friday", 1), Throws.TypeOf<ArgumentException>());            
         }
     }
 }
